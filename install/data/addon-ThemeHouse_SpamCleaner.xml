@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<addon addon_id="ThemeHouse_SpamCleaner" title="[⌂] Spam Cleaner" version_string="1.0.1" version_id="1447261019" url="http://xf.themehouse.io/" install_callback_class="ThemeHouse_Install" install_callback_method="install" uninstall_callback_class="ThemeHouse_Install" uninstall_callback_method="uninstall">
+  <admin_navigation/>
+  <admin_permissions/>
+  <admin_style_properties/>
+  <admin_templates/>
+  <admin_template_modifications/>
+  <code_events/>
+  <code_event_listeners>
+    <listener event_id="controller_pre_dispatch" execute_order="10" callback_class="ThemeHouse_Listener_ControllerPreDispatch" callback_method="controllerPreDispatch" active="1" hint="" description=""/>
+    <listener event_id="file_health_check" execute_order="10" callback_class="ThemeHouse_SpamCleaner_Listener_FileHealthCheck" callback_method="fileHealthCheck" active="1" hint="" description=""/>
+    <listener event_id="init_dependencies" execute_order="10" callback_class="ThemeHouse_Listener_InitDependencies" callback_method="initDependencies" active="1" hint="" description=""/>
+    <listener event_id="load_class" execute_order="10" callback_class="ThemeHouse_SpamCleaner_Listener_LoadClass" callback_method="loadClassSpam" active="0" hint="XenForo_SpamHandler_Thread" description="XenForo_SpamHandler_Thread (For XenForo 1.2 and above)" compatibility_switch="1"/>
+    <listener event_id="load_class" execute_order="10" callback_class="ThemeHouse_SpamCleaner_Listener_LoadClass" callback_method="loadClassDataWriter" active="0" hint="XenForo_DataWriter_Discussion_Thread" description="XenForo_DataWriter_Discussion_Thread (For XenForo 1.2 and above)" compatibility_switch="1"/>
+    <listener event_id="load_class_datawriter" execute_order="10" callback_class="ThemeHouse_SpamCleaner_Listener_LoadClass" callback_method="loadClassDataWriter" active="1" hint="" description="(For XenForo 1.1 and below)" compatibility_switch="1"/>
+    <listener event_id="load_class_spam" execute_order="10" callback_class="ThemeHouse_SpamCleaner_Listener_LoadClass" callback_method="loadClassSpam" active="1" hint="" description="(For XenForo 1.1 and below)" compatibility_switch="1"/>
+  </code_event_listeners>
+  <cron/>
+  <email_templates/>
+  <email_template_modifications/>
+  <optiongroups>
+    <group group_id="th_spamCleaner" display_order="2000" debug_only="0"/>
+    <option option_id="th_spamCleaner_reassignThreadOnDelete" edit_format="onoff" data_type="boolean" can_backup="1">
+      <default_value>1</default_value>
+      <edit_format_params/>
+      <sub_options/>
+      <relation group_id="th_spamCleaner" display_order="1"/>
+    </option>
+  </optiongroups>
+  <permissions>
+    <permission_groups/>
+    <permissions/>
+    <interface_groups/>
+  </permissions>
+  <phrases>
+    <phrase title="option_group_th_spamCleaner" version_id="1417434838" version_string="1.0.0"><![CDATA[Spam Cleaner by ThemeHouse]]></phrase>
+    <phrase title="option_group_th_spamCleaner_description" version_id="1417434838" version_string="1.0.0"><![CDATA[Options for the Spam Cleaner by ThemeHouse add-on.]]></phrase>
+    <phrase title="option_th_spamCleaner_reassignThreadOnDelete" version_id="1417434838" version_string="1.0.0"><![CDATA[Reassign thread on permanent delete]]></phrase>
+    <phrase title="option_th_spamCleaner_reassignThreadOnDelete_explain" version_id="1417434838" version_string="1.0.0"><![CDATA[If enabled, this will change the thread starter to the first clean message, retaining all other messages and only removing the messages posted by the spammer.<br />Note: this requires the <a href="admin.php?options/view-option/spamThreadAction/">Spam Cleaner Thread Action</a> option to be set to 'Permanent Delete'.]]></phrase>
+  </phrases>
+  <route_prefixes/>
+  <style_properties/>
+  <templates/>
+  <public_template_modifications>
+    <modification template="footer" modification_key="th_copyrightNotice_spamCleaner" description="Copyright notice for [⌂] Spam Cleaner" execution_order="1" enabled="1" action="callback">
+      <find><![CDATA[/{xen:phrase (?:xenforo|extra)_copyright}/]]></find>
+      <replace><![CDATA[ThemeHouse_Listener_InitDependencies::copyrightNotice]]></replace>
+    </modification>
+  </public_template_modifications>
+  <bb_code_media_sites/>
+  <bb_codes/>
+</addon>
